@@ -224,7 +224,7 @@ async def generate_report(update: Update, context: ContextTypes.DEFAULT_TYPE, ve
         )
 
         # Инициализация LLMChain с использованием ChatOpenAI
-        llm = ChatOpenAI(temperature=0.0, model_name="gpt-4")
+        llm = ChatOpenAI(temperature=0.0, model_name="gpt-3.5-turbo")
         chain = LLMChain(llm=llm, prompt=prompt_template)
 
         # Подготовка входных данных для промпта

@@ -183,10 +183,8 @@ async def generate_report(update: Update, context: ContextTypes.DEFAULT_TYPE, ve
 
         # Формирование анализа конкурентов для промпта
         competitor_analysis = "\n".join([
-            f"- {comp.get('title', 'найди инфо')
-                 } ({comp.get('username', 'найди инфо')}): "
-            f"{comp.get('subscribers', 'найди инфо')} подписчиков, средний охват поста {
-                comp.get('avg_post_reach', 'найди инфо')}, "
+            f"- {comp.get('title', 'найди инфо')} ({comp.get('username', 'найди инфо')}): "
+            f"{comp.get('subscribers', 'найди инфо')} подписчиков, средний охват поста {comp.get('avg_post_reach', 'найди инфо')}, "
             for comp in competitor_data if comp
         ])
 
@@ -257,8 +255,7 @@ async def generate_report(update: Update, context: ContextTypes.DEFAULT_TYPE, ve
         # Формирование итогового отчета
         report = (
             f"**Твоя SMM Стратегия:**\n\n{strategy}\n\n"
-            f"**Стандартное распределение ежемесячного бюджета:**\n{
-                budget_allocation}"
+            f"**Стандартное распределение ежемесячного бюджета:**\n{budget_allocation}"
         )
         await update.message.reply_text(report, parse_mode='Markdown')
         logger.info("Report generated and sent to the user.")

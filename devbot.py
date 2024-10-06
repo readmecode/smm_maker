@@ -106,7 +106,7 @@ async def collect_target_audience(update: Update, context: ContextTypes.DEFAULT_
     await append_to_memory(update, context)
     context.user_data['target_audience'] = update.message.text.strip()
     await update.message.reply_text(
-        "Укажите 1-3 конкурента в Telegram (их @username или ссылки на каналы), с которыми хочешь сравниться или превзойти."
+        "Укажи 1-3 конкурента в Telegram (их @username или ссылки на каналы), с которыми хочешь сравниться или превзойти."
     )
     return COLLECT_COMPETITORS
 
@@ -195,7 +195,7 @@ async def generate_report(update: Update, context: ContextTypes.DEFAULT_TYPE, ve
             input_variables=["history", "product_info", "usp",
                              "target_audience", "competitor_analysis", "budget", "duration"],
             template="""
-Ты опытный SMM-агент с глубоким пониманием рынка в России. Используя предоставленную информацию, разработай детализированную SMM-стратегию для продвижения продукта только в Telegram.
+Ты опытный SMM-агент с глубоким пониманием рынка. Используя предоставленную информацию, разработай детализированную SMM-стратегию для продвижения продукта в Telegram.
 
 История общения:
 {history}
@@ -215,11 +215,11 @@ async def generate_report(update: Update, context: ContextTypes.DEFAULT_TYPE, ve
 Общий бюджет: {budget} тысяч рублей
 Длительность кампании: {duration} месяцев
 
-Требования к стратегии продвижения в Telegram:
+Требования к стратегии продвижения:
 - Подробный контент-план с указанием типов контента и частоты публикаций.
 - Рекомендации по каналам продвижения и рекламе.
 - Конкретные действия для достижения целей.
-- Прогнозируемые KPI и метрики успеха.
+- Целевые KPI и метрики успеха с учетом информации выше.
 
 Пожалуйста, представь стратегию в структурированном виде.
 """
@@ -248,7 +248,7 @@ async def generate_report(update: Update, context: ContextTypes.DEFAULT_TYPE, ve
         strategy = chain.run(prompt_inputs)
 
         if verbose:
-            logger.info(f"LLM response:\n{strategy}")Ï
+            logger.info(f"LLM response:\n{strategy}")
 
         # Пересчет бюджета (пример с использованием встроенного калькулятора)
         budget_allocation = calculate_budget_allocation(
@@ -256,7 +256,7 @@ async def generate_report(update: Update, context: ContextTypes.DEFAULT_TYPE, ve
 
         # Формирование итогового отчета
         report = (
-            f"****\n\n{strategy}\n\n"
+            f"**Твоя SMM Стратегия:**\n\n{strategy}\n\n"
             f"**Стандартное распределение ежемесячного бюджета:**\n{
                 budget_allocation}"
         )

@@ -184,7 +184,7 @@ async def generate_report(update: Update, context: ContextTypes.DEFAULT_TYPE, ve
         # Формирование анализа конкурентов для промпта
         competitor_analysis = "\n".join([
             f"- {comp.get('title', 'найди инфо')
-                 } (@{comp.get('username', 'найди инфо')}): "
+                 } ({comp.get('username', 'найди инфо')}): "
             f"{comp.get('subscribers', 'найди инфо')} подписчиков, средний охват поста {
                 comp.get('avg_post_reach', 'найди инфо')}, "
             for comp in competitor_data if comp
@@ -195,7 +195,7 @@ async def generate_report(update: Update, context: ContextTypes.DEFAULT_TYPE, ve
             input_variables=["history", "product_info", "usp",
                              "target_audience", "competitor_analysis", "budget", "duration"],
             template="""
-Ты опытный SMM-агент с глубоким пониманием рынка в России. Используя предоставленную информацию, разработай детализированную SMM-стратегию для продвижения продукта в Telegram.
+Ты опытный SMM-агент с глубоким пониманием рынка в России. Используя предоставленную информацию, разработай детализированную SMM-стратегию для продвижения продукта только в Telegram.
 
 История общения:
 {history}
@@ -215,7 +215,7 @@ async def generate_report(update: Update, context: ContextTypes.DEFAULT_TYPE, ve
 Общий бюджет: {budget} тысяч рублей
 Длительность кампании: {duration} месяцев
 
-Требования к стратегии:
+Требования к стратегии продвижения в Telegram:
 - Подробный контент-план с указанием типов контента и частоты публикаций.
 - Рекомендации по каналам продвижения и рекламе.
 - Конкретные действия для достижения целей.
@@ -248,7 +248,7 @@ async def generate_report(update: Update, context: ContextTypes.DEFAULT_TYPE, ve
         strategy = chain.run(prompt_inputs)
 
         if verbose:
-            logger.info(f"LLM response:\n{strategy}")
+            logger.info(f"LLM response:\n{strategy}")Ï
 
         # Пересчет бюджета (пример с использованием встроенного калькулятора)
         budget_allocation = calculate_budget_allocation(
